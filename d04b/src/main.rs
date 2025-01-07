@@ -1,5 +1,3 @@
-use std::usize;
-
 fn test_word(word: &str, index_data: usize, data: &str, range: usize) -> bool {
     for (index_word, letter) in word.chars().enumerate() {
         let offset = index_data + index_word * range;
