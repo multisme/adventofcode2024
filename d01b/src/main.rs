@@ -4,6 +4,8 @@ fn main() {
         .map(|x| x.parse::<i32>().unwrap())
         .enumerate()
         .partition(|(index, _)| index % 2 == 0);
+
+
     let left = left
         .into_iter()
         .map(|(_, value)| value);
