@@ -1,4 +1,6 @@
-#[derive(Debug, Copy, Clone, PartialEq)]
+use std::collections::HashSet;
+
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 enum Direction {
     North,
     East,
@@ -44,9 +46,9 @@ impl Map {
     }
 }
 
-fn try_map(mut guard: Guard, mut map: Map) -> bool {
+fn try_map(mut guard: Guard, map: &Map) -> bool {
 
-    let mut previous_stops = Vec::new();
+    let mut previous_stops = HashSet::new();
     while let Some(x) = map.step(guard) {
         if previous_stops.contains(&(x, guard.dir)) {
             return true;
@@ -54,12 +56,11 @@ fn try_map(mut guard: Guard, mut map: Map) -> bool {
         match map.grid[x] {
             '\n' => break,
             '#' =>  {
-                previous_stops.push((x, guard.dir));
+                previous_stops.insert((x, guard.dir));
                 guard.rotate()
 
             },
             _ => {
-                map.grid[x] = 'X';
                 guard.position = x;
             }
         }
@@ -82,7 +83,8 @@ fn main() {
 
     let mut new_obstacle = guard;
     let mut count_loops = 0;
-    let mut loops_gen_pos = Vec::new();
+    let mut loops_gen_pos = HashSet::new();
+    let mut new_map = map.clone();
     while let Some(x) = map.step(new_obstacle) {
         if loops_gen_pos.contains(&x) {
             new_obstacle.position = x;
@@ -94,12 +96,12 @@ fn main() {
                 new_obstacle.rotate()
             },
             _ => {
-                let mut new_map = map.clone();
                 new_map.grid[x] = '#';
-                if try_map(guard, new_map){
+                if try_map(guard, &new_map){
                    count_loops +=1;
-                    loops_gen_pos.push(x);
+                    loops_gen_pos.insert(x);
                 }
+                new_map.grid[x] = '.';
                 new_obstacle.position = x; }
         }
     }
