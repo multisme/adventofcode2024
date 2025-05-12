@@ -8,7 +8,6 @@ fn parse() -> (HashMap<i32, HashSet<i32>>, Vec<Vec<i32>>) {
 
     let mut rules: HashMap<i32, HashSet<i32>> = HashMap::new();
     data[0].lines().for_each(|l| {
-        println!("{:?}", l);
         let values = l
             .split("|")
             .map(|e| e.parse::<i32>().unwrap())
@@ -59,5 +58,5 @@ fn main() {
             }
         })
         .sum();
-    println!("{:?} {:?}", rules, result);
+    println!("{:?}", result);
 }
