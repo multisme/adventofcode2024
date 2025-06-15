@@ -1,4 +1,4 @@
-use std::{collections::VecDeque, usize};
+use std::{collections::VecDeque};
 
 fn main() {
     let data = include_str!("../input.txt");
@@ -31,12 +31,12 @@ fn main() {
             if *x != -1 {
                 match stack.pop_front() {
                     Some(v) => *v,
-                    None => 0,
+                    _ => 0,
                 }
             } else {
                 match stack.pop_back() {
                     Some(v) => *v,
-                    None => 0,
+                    _ => 0,
                 }
             }
         })
