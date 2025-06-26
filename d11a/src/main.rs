@@ -1,16 +1,16 @@
-use std::{u64};
+use std::u64;
 
 #[derive(Clone, Debug)]
 enum Stone {
     Str(String),
-    Num(u64)
+    Num(u64),
 }
 
 impl Stone {
-    fn convert(&mut self) -> Self{
+    fn convert(&mut self) -> Self {
         match self {
             Stone::Str(value) => Stone::Num(value.parse::<u64>().unwrap()),
-            Stone::Num(value) => Stone::Str(value.to_string())
+            Stone::Num(value) => Stone::Str(value.to_string()),
         }
     }
 
@@ -18,7 +18,7 @@ impl Stone {
         match self {
             Stone::Str(value) => value.len(),
             Stone::Num(0) => 1,
-            Stone::Num(value) => (value.ilog10() + 1) as usize
+            Stone::Num(value) => (value.ilog10() + 1) as usize,
         }
     }
 
@@ -40,18 +40,16 @@ impl Stone {
                 let size = Stone::Num(*value).len();
                 if size % 2 == 0 {
                     self.split(size).to_vec()
-                } else if *value == 0{
+                } else if *value == 0 {
                     [Stone::Num(1)].to_vec()
                 } else {
                     [Stone::Num(value * 2024)].to_vec()
                 }
-            },
-            _ => [].to_vec()
+            }
+            _ => [].to_vec(),
         }
     }
 }
-
-
 
 fn main() {
     let data = include_str!("../input.txt")
