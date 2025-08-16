@@ -16,5 +16,5 @@ fn main() {
         .split("do()")
         .map(|d| d.split("don't()").next().unwrap())
         .fold(0, |acc, line| acc + memory_compute(line));
-    println!("{:?}", res);
+    println!("{res:?}");
 }

@@ -3,8 +3,11 @@ struct Calibration {
     values: Vec<i64>,
 }
 
-fn join_num(left: i64, right: i64) -> i64{
-    [left.to_string(), right.to_string()].concat().parse().unwrap()
+fn join_num(left: i64, right: i64) -> i64 {
+    [left.to_string(), right.to_string()]
+        .concat()
+        .parse()
+        .unwrap()
 }
 
 fn test_calibration(result: i64, acc: i64, values: &[i64]) -> bool {

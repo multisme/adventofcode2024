@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 struct Position {
@@ -70,5 +70,5 @@ fn main() {
         }
     }
     let result: u32 = starts.iter().map(|p| explore_grid(&map, *p, 0)).sum();
-    println!("{}", result);
+    println!("{result}");
 }

@@ -1,4 +1,4 @@
-use std::{collections::VecDeque};
+use std::collections::VecDeque;
 
 fn main() {
     let data = include_str!("../input.txt");
@@ -43,5 +43,5 @@ fn main() {
         .enumerate()
         .map(|(a, b)| a as i64 * b)
         .sum();
-    println!("{:?}", result);
+    println!("{result:?}");
 }

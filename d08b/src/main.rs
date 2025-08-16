@@ -13,7 +13,9 @@ struct Position {
 }
 
 fn compute_all_antinodes(a: Position, other_pos: &[Position], grid: &Grid) -> Vec<Position> {
-    let res = other_pos
+    
+
+    other_pos
         .iter()
         .flat_map(|b| {
             let mut antinodes = Vec::new();
@@ -39,9 +41,7 @@ fn compute_all_antinodes(a: Position, other_pos: &[Position], grid: &Grid) -> Ve
             }
             antinodes
         })
-        .collect();
-
-    res
+        .collect()
 }
 
 fn main() {

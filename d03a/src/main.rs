@@ -11,5 +11,5 @@ fn main() {
             l.parse::<i32>().unwrap() * r.parse::<i32>().unwrap()
         })
         .sum::<i32>();
-    println!("{:?}", res);
+    println!("{res:?}");
 }

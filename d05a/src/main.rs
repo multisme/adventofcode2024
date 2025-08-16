@@ -33,9 +33,9 @@ fn verify_update(rules: &HashMap<i32, HashSet<i32>>, update: Vec<i32>) -> bool {
         if forbiden.contains(&page) {
             return false;
         }
-        let temp = HashSet::new();
-        let new_rules = rules.get(&page).unwrap_or(&temp);
-        forbiden.extend(new_rules);
+        if let Some(new_rules) = rules.get(&page) {
+            forbiden.extend(new_rules);
+        }
     }
     true
 }
@@ -47,5 +47,5 @@ fn main() {
         .filter(|update| verify_update(&rules, update.to_vec()))
         .map(|update| *update.get(update.len() / 2).unwrap())
         .sum();
-    println!("{:?}", result);
+    println!("{result:?}");
 }

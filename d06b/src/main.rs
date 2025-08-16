@@ -39,7 +39,11 @@ impl Map {
             Direction::East => Some(guard.position + 1),
             Direction::South => {
                 let pos = guard.position + self.row_size;
-                if pos >= self.size { None } else { Some(pos) }
+                if pos >= self.size {
+                    None
+                } else {
+                    Some(pos)
+                }
             }
             Direction::West => guard.position.checked_sub(1),
         }
@@ -47,7 +51,6 @@ impl Map {
 }
 
 fn try_map(mut guard: Guard, map: &Map) -> bool {
-
     let mut previous_stops = HashSet::new();
     while let Some(x) = map.step(guard) {
         if previous_stops.contains(&(x, guard.dir)) {
@@ -55,11 +58,10 @@ fn try_map(mut guard: Guard, map: &Map) -> bool {
         }
         match map.grid[x] {
             '\n' => break,
-            '#' =>  {
+            '#' => {
                 previous_stops.insert((x, guard.dir));
                 guard.rotate()
-
-            },
+            }
             _ => {
                 guard.position = x;
             }
@@ -71,14 +73,14 @@ fn try_map(mut guard: Guard, map: &Map) -> bool {
 fn main() {
     let data = include_str!("../input.txt");
     let map = Map {
-        grid:  data.chars().collect::<Vec<char>>(),
+        grid: data.chars().collect::<Vec<char>>(),
         row_size: data.lines().next().unwrap().len() + 1,
-        size : data.len(),
+        size: data.len(),
     };
 
-    let guard = Guard { 
+    let guard = Guard {
         dir: Direction::North,
-        position: map.grid.iter().position(|&x| x == '^').unwrap()
+        position: map.grid.iter().position(|&x| x == '^').unwrap(),
     };
 
     let mut new_obstacle = guard;
@@ -92,18 +94,17 @@ fn main() {
         }
         match map.grid[x] {
             '\n' => break,
-            '#' =>  {
-                new_obstacle.rotate()
-            },
+            '#' => new_obstacle.rotate(),
             _ => {
                 new_map.grid[x] = '#';
-                if try_map(guard, &new_map){
-                   count_loops +=1;
+                if try_map(guard, &new_map) {
+                    count_loops += 1;
                     loops_gen_pos.insert(x);
                 }
                 new_map.grid[x] = '.';
-                new_obstacle.position = x; }
+                new_obstacle.position = x;
+            }
         }
     }
-    println!("result: {}", count_loops);
+    println!("result: {count_loops}");
 }

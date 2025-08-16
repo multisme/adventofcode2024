@@ -1,4 +1,3 @@
-use std::u64;
 
 #[derive(Clone, Debug)]
 enum Stone {
@@ -25,7 +24,7 @@ impl Stone {
     fn split(&self, len: usize) -> [Stone; 2] {
         match self {
             Stone::Num(value) => {
-                let div = 10_u64.pow((len as u32 / 2));
+                let div = 10_u64.pow(len as u32 / 2);
                 [Stone::Num(*value / div), Stone::Num(*value % div)]
             }
             Stone::Str(value) => {

@@ -33,14 +33,14 @@ fn verify_update(
     run: usize,
 ) -> (Vec<i32>, usize) {
     let mut forbiden: HashSet<i32> = HashSet::new();
-    for (index, page) in update.clone().into_iter().enumerate() {
-        if forbiden.contains(&page) {
+    for (index, page) in update.iter().enumerate() {
+        if forbiden.contains(page) {
             update.swap(index, index - 1);
             return verify_update(rules, update, run + 1);
         }
-        let temp = HashSet::new();
-        let new_rules = rules.get(&page).unwrap_or(&temp);
-        forbiden.extend(new_rules);
+        if let Some(new_rules) = rules.get(page) {
+            forbiden.extend(new_rules);
+        }
     }
     (update.to_vec(), run)
 }
@@ -58,5 +58,5 @@ fn main() {
             }
         })
         .sum();
-    println!("{:?}", result);
+    println!("{result:?}");
 }

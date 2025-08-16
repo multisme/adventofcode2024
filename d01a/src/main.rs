@@ -19,5 +19,5 @@ fn main() {
         .zip(compute_list(right))
         .map(|(a, b)| (a - b).abs())
         .sum::<i32>();
-    println!("{}", res)
+    println!("{res}");
 }

@@ -26,7 +26,11 @@ impl Guard {
             Direction::East => Some(self.position + 1),
             Direction::South => {
                 let pos = self.position + row_size;
-                if pos > size { None } else { Some(pos) }
+                if pos > size {
+                    None
+                } else {
+                    Some(pos)
+                }
             }
             Direction::West => self.position.checked_sub(1),
         }
@@ -55,5 +59,5 @@ fn main() {
         }
     }
     let result = map.iter().filter(|x| **x == 'X').count();
-    println!("result: {}", result);
+    println!("result: {result}");
 }

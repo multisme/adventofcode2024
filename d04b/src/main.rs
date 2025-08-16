@@ -1,7 +1,7 @@
 fn test_word(word: [char; 3], index_data: usize, data: &[char], range: usize) -> bool {
     for (index_word, letter) in word.iter().enumerate() {
         let offset = index_data + index_word * range;
-        if data.get(offset) != Some(&letter) {
+        if data.get(offset) != Some(letter) {
             return false;
         }
     }
@@ -29,5 +29,5 @@ fn main() {
             res += 1
         }
     }
-    println!("{:?}", res);
+    println!("{res:?}");
 }

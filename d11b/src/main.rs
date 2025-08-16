@@ -1,6 +1,6 @@
-use std::{collections::HashMap};
+use std::collections::HashMap;
 
-fn len(value: u64) -> u32{
+fn len(value: u64) -> u32 {
     match value {
         0 => 1,
         value => value.ilog10() + 1,
@@ -26,10 +26,10 @@ fn change(value: u64) -> Vec<u64> {
 
 fn update(stones: HashMap<u64, u64>) -> HashMap<u64, u64> {
     let mut new_stones: HashMap<u64, u64> = HashMap::new();
-    for (&k, &v) in stones.iter(){
-       let n_ks = change(k); 
-        for n_k in n_ks .iter(){
-                *new_stones.entry(*n_k).or_default() +=  v;
+    for (&k, &v) in stones.iter() {
+        let n_ks = change(k);
+        for n_k in n_ks.iter() {
+            *new_stones.entry(*n_k).or_default() += v;
         }
     }
     new_stones
@@ -40,11 +40,10 @@ fn main() {
         .split_whitespace()
         .map(|v| (v.parse::<u64>().unwrap(), 1))
         .collect::<HashMap<u64, u64>>();
-    println!("{:?}", data);
     let mut stones = data;
     for _i in 0..75 {
         stones = update(stones)
     }
     let res: u64 = stones.values().sum();
-    println!("{}", res);
+    println!("{res}");
 }

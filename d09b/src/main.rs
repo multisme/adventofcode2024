@@ -1,4 +1,3 @@
-use std::collections::VecDeque;
 
 #[derive(PartialEq, Debug)]
 enum MemoryType {
@@ -92,5 +91,5 @@ fn main() {
         .flat_map(|s| vec![s.index; s.size])
         .enumerate()
         .fold(0, |acc, (index, size)| acc + size * index);
-    println!("{:?}", result);
+    println!("{result:?}");
 }

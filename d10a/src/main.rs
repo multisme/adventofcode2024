@@ -12,52 +12,49 @@ fn explore_grid(
     height: u32,
     ends: &mut HashSet<Position>,
 ) {
-    match map.get(&pos) {
-        Some(new_height) => {
-            if *new_height != height {
-                return;
-            } else if height == 9 {
-                ends.insert(pos);
-                return;
-            }
-            explore_grid(
-                map,
-                Position {
-                    x: pos.x + 1,
-                    y: pos.y,
-                },
-                height + 1,
-                ends,
-            );
-            explore_grid(
-                map,
-                Position {
-                    x: pos.x - 1,
-                    y: pos.y,
-                },
-                height + 1,
-                ends,
-            );
-            explore_grid(
-                map,
-                Position {
-                    x: pos.x,
-                    y: pos.y + 1,
-                },
-                height + 1,
-                ends,
-            );
-            explore_grid(
-                map,
-                Position {
-                    x: pos.x,
-                    y: pos.y - 1,
-                },
-                height + 1,
-                ends,
-            );
+    if let Some(new_height) = map.get(&pos) {
+        if *new_height != height {
+            return;
+        } else if height == 9 {
+            ends.insert(pos);
+            return;
         }
-        _ => (),
+        explore_grid(
+            map,
+            Position {
+                x: pos.x + 1,
+                y: pos.y,
+            },
+            height + 1,
+            ends,
+        );
+        explore_grid(
+            map,
+            Position {
+                x: pos.x - 1,
+                y: pos.y,
+            },
+            height + 1,
+            ends,
+        );
+        explore_grid(
+            map,
+            Position {
+                x: pos.x,
+                y: pos.y + 1,
+            },
+            height + 1,
+            ends,
+        );
+        explore_grid(
+            map,
+            Position {
+                x: pos.x,
+                y: pos.y - 1,
+            },
+            height + 1,
+            ends,
+        );
     }
 }
 
@@ -90,5 +87,5 @@ fn main() {
             ends.len()
         })
         .sum();
-    println!("{}", result);
+    println!("{result}");
 }

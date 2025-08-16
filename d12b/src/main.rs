@@ -72,7 +72,7 @@ fn explore_grid(
     map: &mut HashMap<Position, (char, bool)>,
     pos: Position,
     plant: char,
-    (size, corners, adjacent): (&mut u32, &mut u32, bool)
+    (size, corners, adjacent): (&mut u32, &mut u32, bool),
 ) -> u32 {
     match map.get_mut(&pos) {
         Some((plot, visited)) => {
@@ -80,7 +80,7 @@ fn explore_grid(
                 return 1;
             }
 
-            if *visited || !adjacent{
+            if *visited || !adjacent {
                 return 0;
             }
 
@@ -106,7 +106,7 @@ fn explore_grid(
             for win in windows_with_step(&to_analyze, 3, 2) {
                 match *win {
                     [&1, _, &1] => *corners += 1,
-                    [&0, &1, &0] => * corners += 1,
+                    [&0, &1, &0] => *corners += 1,
                     _ => {}
                 }
             }
@@ -134,9 +134,14 @@ fn main() {
         .map(|(pos, (plant, _visited))| {
             let mut perimeter = 0;
             let mut corners = 0;
-            explore_grid(&mut grid, *pos, *plant, (&mut perimeter, &mut corners, true));
+            explore_grid(
+                &mut grid,
+                *pos,
+                *plant,
+                (&mut perimeter, &mut corners, true),
+            );
             corners * perimeter
         })
         .sum();
-    println!("{}", result);
+    println!("{result}");
 }
