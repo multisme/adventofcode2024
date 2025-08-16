@@ -21,8 +21,7 @@ fn main() {
         .collect::<Vec<_>>();
 
     let safe_reports = reports
-        .clone()
-        .into_iter()
+        .iter()
         .filter(|report| is_safely_decreasing(report) || is_safely_increasing(report))
         .collect::<Vec<_>>();
     println!("{:?}", safe_reports.len())
